@@ -1,0 +1,153 @@
+GET sim_search_alias/_search
+{                            
+  "query": {                        
+    "match": {    
+      "supi": "405854115072077"
+    }
+  }
+}
+ 
+
+GET link_search_alias/_search
+{
+"query":{
+"nested":{
+"path":"A-end",
+"query":{
+"wildcard":{
+"A-end.field1":"5134621823"
+}
+}
+}
+}
+}
+ 
+
+GET customer_search_alias/_search
+{                            
+  "query": {                        
+    "match": {    
+      "customer-id": "5313675923"
+    }
+  }
+}
+ 
+ 
+ 
+GET customer_search_alias/_search
+{"query": {
+  "match": {
+    "customerID": "614776035"
+  }
+}
+}
+ 
+
+GET response_handling_search_alias/_search
+    {
+      "query": {
+        "wildcard": {
+          "provisioning-order-id": {
+            "value": "naveen_draas_260326_1150"
+          }
+        }
+      }
+    }
+
+
+DELETE workflow_nodeanalytics*
+DELETE nodeanalytics*
+DELETE jdasouthboundstatedetails*
+DELETE provisioning_order_input_data*
+DELETE provisioningorderhistory*
+DELETE response_handling*
+
+
+
+response_handling--------------------
+provisioningorderhistory----------------
+jdasouthboundstatedetails---------------
+provisioning_order_input_data----------------
+workflow_nodeanalytics-------------
+nodeanalytics------------
+sim-----
+customer------------
+link---------
+servicefeatures-------------
+jdasouthboundtimedetails------------
+product_servicefeatures--------
+
+
+
+GET workflow_nodeanalytics_search_alias/_count
+GET nodeanalytics_search_alias/_count
+GET provisioning_order_input_data_search_alias/_count
+GET provisioningorderhistory_search_alias/_count
+GET jdasouthboundstatedetails_search_alias/_count
+GET response_handling_search_alias/_count
+GET sim_search_alias/_count
+GET customer_search_alias/_count
+GET servicefeatures_search_alias/_count
+GET link_search_alias/_count
+
+POST workflow_nodeanalytics_*/_delete_by_query
+{
+  "query": {
+    "match_all": {}
+  }
+}
+ 
+ 
+POST provisioning_order_input_data_*/_delete_by_query
+{
+  "query": {
+    "match_all": {}
+  }
+}
+ 
+
+POST jdasouthboundstatedetails_*/_delete_by_query
+{
+  "query": {
+    "match_all": {}
+  }
+}
+ 
+ 
+POST nodeanalytics_*/_delete_by_query
+{
+  "query": {
+    "match_all": {}
+  }
+}
+ 
+ 
+POST provisioningorderhistory_*/_delete_by_query
+{
+  "query": {
+    "match_all": {}
+  }
+}
+ 
+ 
+POST response_handling_*/_delete_by_query
+{
+  "query": {
+    "match_all": {}
+  }
+}
+ 
+ 
+DELETE TOPIC:
+./kafka-topics.sh --delete --topic insertesdata --bootstrap-server 10.60.180.194:9092
+ 
+CREATE TOPIC:
+./kafka-topics.sh --create --topic DRM_GR --bootstrap-server 10.60.180.194:9092 --partitions 4 --replication-factor 2
+ 
+DESCRIBE SPECIFIC TOPIC:
+kafka-topics.sh --describe --topic DRM_GR --bootstrap-server 10.60.180.194:9092
+ 
+TO LIST THE TOPIC:
+kafka-topics.sh --list --bootstrap-server 10.60.180.194:9092
+
+./kafka-topics.sh --bootstrap-server 10.60.180.202:9092 --describe
